@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="tpp4" transaction-type="RESOURCE_LOCAL">
+		<class>tpp4.Client</class>
+		<class>tpp4.Product</class>
+		<class>tpp4.Zakaz</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby:D:\Институт\3 курс\2 семестр\TPP\tpp5\db_derby"/>
+			<property name="javax.persistence.jdbc.user" value="my"/>
+			<property name="javax.persistence.jdbc.password" value="123"/>
+			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>		
+			</properties>
+	</persistence-unit>
+</persistence>
