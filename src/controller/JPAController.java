@@ -1,5 +1,6 @@
 package controller;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,9 +35,9 @@ public class JPAController implements IController {
 	EntityManagerFactory emf =Persistence.createEntityManagerFactory("tpp4");
 	public List getObjectList(Class clazz) {
 		EntityManager em = emf.createEntityManager();
-		// Формуємо ім'я іменованого запиту для заданого класу
+		// Г”Г®Г°Г¬ГіВєГ¬Г® ВіГ¬'Гї ВіГ¬ГҐГ­Г®ГўГ Г­Г®ГЈГ® Г§Г ГЇГЁГІГі Г¤Г«Гї Г§Г Г¤Г Г­Г®ГЈГ® ГЄГ«Г Г±Гі
 		String queryName = clazz.getSimpleName() + "." + "findAll";
-		// Отримуємо перелік записів таблиці заданого класу
+		// ГЋГІГ°ГЁГ¬ГіВєГ¬Г® ГЇГҐГ°ГҐГ«ВіГЄ Г§Г ГЇГЁГ±ВіГў ГІГ ГЎГ«ГЁГ¶Ві Г§Г Г¤Г Г­Г®ГЈГ® ГЄГ«Г Г±Гі
 		List list = em.createNamedQuery(queryName).getResultList();
 		em.close();
 		return list;
@@ -46,20 +47,20 @@ public class JPAController implements IController {
 	public TableModel getModel(String className) {
 		try {
 			Class clazz = Class.forName("tpp4." + className);
-			// Отримуємо заголовок таблиці
+			// ГЋГІГ°ГЁГ¬ГіВєГ¬Г® Г§Г ГЈГ®Г«Г®ГўГ®ГЄ ГІГ ГЎГ«ГЁГ¶Ві
 			IModel obj = (IModel) clazz.newInstance();
 			String[] header = obj.getTableHeaders();
-			// Отримуємо список об'єктів
+			// ГЋГІГ°ГЁГ¬ГіВєГ¬Г® Г±ГЇГЁГ±Г®ГЄ Г®ГЎ'ВєГЄГІВіГў
 			List list = getObjectList(clazz);
 			if (list == null || list.size() == 0)
 				return new DefaultTableModel(null, header);
-			// Створюємо масив потрібного розміру
+			// Г‘ГІГўГ®Г°ГѕВєГ¬Г® Г¬Г Г±ГЁГў ГЇГ®ГІГ°ВіГЎГ­Г®ГЈГ® Г°Г®Г§Г¬ВіГ°Гі
 			Object[][] array = new Object[list.size()][header.length];
-			// Наповнюємо масив
+			// ГЌГ ГЇГ®ГўГ­ГѕВєГ¬Г® Г¬Г Г±ГЁГў
 			int i = 0;
 			for (Object s : list)
 				array[i++] = ((IModel) s).getTableRowData();
-			// Повертаємо модель
+			// ГЏГ®ГўГҐГ°ГІГ ВєГ¬Г® Г¬Г®Г¤ГҐГ«Гј
 			return new DefaultTableModel(array, header);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,7 +70,7 @@ public class JPAController implements IController {
 	
 	public boolean exist(IModel obj) {
 		Class clazz = obj.getClass();
-		// Отримуємо перелік записів таблиці заданого класу
+		// ГЋГІГ°ГЁГ¬ГіВєГ¬Г® ГЇГҐГ°ГҐГ«ВіГЄ Г§Г ГЇГЁГ±ВіГў ГІГ ГЎГ«ГЁГ¶Ві Г§Г Г¤Г Г­Г®ГЈГ® ГЄГ«Г Г±Гі
 		List list = getObjectList(clazz);
 		if (list != null&&list.size() != 0)
 			for (Object current : list)
