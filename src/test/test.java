@@ -12,7 +12,7 @@ public class test {
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("tpp4");
 		EntityManager em = emf.createEntityManager();
-		String sql = "alter table ZAKAZ add  IDPRODUCT3 integer, add foreign key (IDPRODUCT3)";
+		String sql = "alter table ZAKAZ add  IDPRODUCT3 integer, add foreign key (IDPRODUCT3) references product (id) on delete  cascade";
 		Query q = em.createNativeQuery(sql);
 		em.getTransaction().begin();
 		q.executeUpdate();
